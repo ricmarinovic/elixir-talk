@@ -1,0 +1,279 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Elixir workshop</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background="#8757b3">
+          <h1>Elixir</h1>
+          <img src="images/elixir.jpg" alt="Glasses and book" style="height: 400px">
+          <p>Ricardo Marinovic</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>José Valim</h2>
+            <img src="images/jose-valim.jpg" alt="Photography of Jose Valim">
+          </section>
+
+          <section data-background="#dddddd">
+            <img src="images/rails-core.png" alt="List of Rails contributors">
+          </section>
+
+          <section data-background="#dddddd">
+            <img src="images/thread-safe.png" alt="Rails announcing it is now thread-safe" style="height: 500px; background: white;">
+          </section>
+        </section>
+
+        <section>
+          <img src="images/moore-law.png" alt="" style="height: 500px; background: white;">
+        </section>
+
+        <section>
+          <section data-background="#dddddd">
+            <h2>Erlang/OTP</h2>
+            <img src="images/erlang-logo.png" alt="Erlang logo" style="height: 400px; background: white;">
+          </section>
+
+          <section data-background="#dddddd">
+            <ul>
+              <li>Ericsson, 1986</li>
+              <li class="fragment">OTP - Open Telecom Plataform</li>
+              <li class="fragment">Distributed</li>
+              <li class="fragment">Fault-tolerant</li>
+              <li class="fragment">Highly available</li>
+              <li class="fragment">Hot code swaping</li>
+            </ul>
+          </section>
+
+          <section data-background="#dddddd">
+            <img src="images/server-nodes.png" alt="" style="height: 600px; background: white;">
+          </section>
+
+          <section data-background="#dddddd">
+            <img src="images/whatsapp.png" alt="" style="height: 500px; background: white;">
+          </section>
+
+          <section>
+            <h2>Syntax</h2>
+            <pre><code class="erlang">-module(hello_module).
+-export([some_fun/0, some_fun/1]).
+
+some_fun() ->
+  io:format('~s~n', ['Hello world!']).
+
+% This one works only with lists
+some_fun(List) when is_list(List) ->
+  io:format('~s~n', List).
+
+% Non-exported functions are private
+priv() ->
+  secret_info.</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section data-background="#8757b3">
+            <h2>Elixir</h2>
+            <img src="images/elixir-logo.png" alt="Elixir logo" style="height: 400px; background: white; border-radius: 20px;">
+          </section>
+
+          <section data-background="#8757b3">
+            <ul>
+              <li>Polymorphism</li>
+              <li>Metaprogramming</li>
+              <li>Tooling</li>
+              <li>and <a href="https://elixir-lang.org/blog/2013/08/08/elixir-design-goals/">more</a>...</li>
+            </ul>
+          </section>
+
+          <section data-background="#8757b3">
+            <h2>Syntax</h2>
+            <pre><code class="elixir">defmodule HelloModule do
+  def some_fun do
+    IO.puts "Hello world!"
+  end
+
+  # This one works only with lists
+  def some_fun(list) when is_list(list) do
+    IO.inspect list
+  end
+
+  # A private function
+  defp priv do
+    :secret_info
+  end
+end</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Concurrency</h2>
+
+            <ul>
+              <li>Process</li>
+              <li>Supervisor</li>
+              <li>GenServer</li>
+              <li>Agent</li>
+              <li>Task</li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>Sequential</h4>
+            <img src="images/sequential.png" alt="">
+          </section>
+          <section>
+            <h4>Concurrent</h4>
+            <img src="images/concurrent.png" alt="">
+          </section>
+
+          <section>
+            <h4>Parallel</h4>
+            <img src="images/parallel.png" alt="">
+          </section>
+        </section>
+
+        <section>
+          <h2>Functional</h2>
+          <ul>
+            <li>Functions</li>
+            <li>Immutability</li>
+            <li>Recursive</li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>Collection Types</h2>
+            <h4>Tuple</h4>
+            <p>Stored contiguously in memory!</p>
+            <pre><code class="elixir">{1, "aloha", :hey}</code></pre>
+            <p>Use case: pattern matching</p>
+            <pre><code class="elixir">{:ok, file} = File.open("file.txt")</code></pre>
+          </section>
+
+          <section>
+            <h4>List</h4>
+            <p>Lists are linked lists!</p>
+            <pre><code class="elixir">[1, "aloha", :hey]</code></pre>
+            <pre><code class="elixir">[head | tail] #=> [1 | ["aloha", :hey]]</code></pre>
+            <pre><code class="elixir">[1 | ["aloha" | [:hey | []]]]</code></pre>
+          </section>
+
+          <section>
+            <h4>Keyword list</h4>
+            <p>Key must be an atom!</p>
+            <pre><code class="elixir">[a: 1, b: "aloha", c: :hey]</code></pre>
+            <pre><code class="elixir">[{:a, 1}, {:b, "aloha"}, {:c, :hey}]</code></pre>
+            <p>Use case: options to functions</p>
+            <pre><code class="elixir">Supervisor.start_link(children, strategy: :one_for_one,
+  name: Discordia.Supervisor)</code></pre>
+          </section>
+
+          <section>
+            <h4>Map</h4>
+            <p>Order is not guaranteed!</p>
+            <pre><code class="elixir">%{:a => 1, 2 => "aloha", "cool" => :hey}</code></pre>
+            <pre><code class="elixir">%{name: "Ricardo", username: "rkma"}</code></pre>
+            <h4>Structs</h4>
+            <pre><code class="elixir">%User{name: "Ricardo", username: "rkma"}</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Pattern matching</h2>
+            <h4>Match operator</h4>
+            <p><code>left = right</code></p>
+          </section>
+
+          <section>
+            <pre><code>status = {:started, :normal}
+
+case status do
+  {:plus_hold, ^value, _} ->
+    {:ok, status}
+  {:plus_hold, status_value, _} ->
+    {:error, "Player must play a #{status_value} card."}
+  {:ended, _} ->
+    {:error, "Game is over."}
+  {_, _} ->
+    {:ok, status}
+end</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <h2>Guard clauses</h2>
+          <pre><code class="elixir">defmodule Math do
+  def test(0), do: :zero
+  def test(n) when n > 0, do: :positive
+  def test(n) when n < 0, do: :negative
+end</code></pre>
+        </section>
+
+        <section>
+          <h2>Pipe operator</h2>
+          <p><code>left |> right</code></p>
+        </section>
+
+        <section>
+          <h2>Phoenix</h2>
+          <ul>
+            <li>Ecto</li>
+            <li>Channels</li>
+          </ul>
+        </section>
+
+        <section data-background="#dddddd">
+          <h2>Books</h2>
+          <img src="images/programming-elixir-1-3.jpg" alt="Programming Elixir 1.3 book cover" style="height: 270px; background: white;">
+          <img src="images/phoenix.jpg" alt="Programming Phoenix book cover" style="height: 270px; background: white;">
+          <br>
+          <img src="images/elixir-in-action.jpg" alt="Elixir in Action book cover" style="height: 230px; background: white;">
+          <img src="images/the-little-elixir-and-otp-guidebook-meap.jpg" alt="The Little Elixir and OTP Guidebook book cover" style="height: 230px; background: white;">
+          <img src="images/cmelixir.jpg" alt="Metaprogramming book cover" style="height: 230px; background: white;">
+        </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
